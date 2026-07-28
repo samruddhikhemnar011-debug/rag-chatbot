@@ -1,12 +1,9 @@
-from fastapi import APIRouter
-
+from fastapi import APIRouter, UploadFile, File
+from app.services.pdf_service import upload_pdf
 
 router = APIRouter()
 
 
-@router.get("/")
-def pdf_home():
-
-    return{
-        "message":"PDF APIs Working Successfully"
-    }
+@router.post("/upload")
+def upload(file: UploadFile = File(...)):
+    return upload_pdf(file)
